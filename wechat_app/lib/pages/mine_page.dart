@@ -33,6 +33,8 @@ class _MinePageState extends State<MinePage> {
 //              child: Image(image: AssetImage('images/Hank.png')),
             ), //头像
             Container(
+
+              width: MediaQuery.of(context).size.width - 80,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,7 +48,8 @@ class _MinePageState extends State<MinePage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 10,left: 10),
+
+                    margin: EdgeInsets.only(bottom: 10,left: 10,right: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
