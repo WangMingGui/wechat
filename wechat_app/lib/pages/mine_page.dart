@@ -32,38 +32,38 @@ class _MinePageState extends State<MinePage> {
               ),
 //              child: Image(image: AssetImage('images/Hank.png')),
             ), //头像
-            Container(
-
-              width: MediaQuery.of(context).size.width - 80,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
 //                    color: Colors.red,
-                    margin: EdgeInsets.only(top: 13, left: 10),
-                    child: Text(
-                      'Hank',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-
-                    margin: EdgeInsets.only(bottom: 10,left: 10,right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text('微信号：123232323'),
-                        Image(
-                          image: AssetImage('images/icon_right.png'),
-                          width: 15,
+//                        margin: EdgeInsets.only(top: 13, left: 10),
+                        child: Text(
+                          'Hank',
+                          style: TextStyle(fontSize: 18),
                         ),
-                      ],
-                    ),
-                  )
-                ],
+                      ),
+                      Container(
+//                        margin: EdgeInsets.only(bottom: 10,left: 10,right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('微信号：123232323'),
+                            Image(
+                              image: AssetImage('images/icon_right.png'),
+                              width: 15,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),//昵称
               ),
-            ),
           ],
         ),
       ),
