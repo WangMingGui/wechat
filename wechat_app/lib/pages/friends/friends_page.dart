@@ -7,9 +7,6 @@ import 'package:wechatapp/pages/friends/friends_data.dart';
 import 'package:wechatapp/pages/friends/index_bar.dart';
 
 import '../../const.dart';
-import '../../const.dart';
-import '../../const.dart';
-import 'friends_data.dart';
 import 'friends_data.dart';
 
 class FriendsPage extends StatefulWidget {
@@ -42,23 +39,23 @@ class _FriendsPageState extends State<FriendsPage> {
       return a.indexLetter.compareTo(b.indexLetter);
     });
 
-    var _gruopOffset = 50 * 4;
+    _scrollController = ScrollController();
+
+    var _gruopOffset = 50.0 * _headerData.length;
     //经过循环计算，将第一个头位置算出来，放入字典
     for (int i = 0; i < _listDatas.length; i++) {
       if (i < 1) {
         _groupOffsetMap.addAll({_listDatas[i].indexLetter: _gruopOffset});
         //保存完再加_groupOffset便宜
-        _gruopOffset += 80;
+        _gruopOffset += 80.0;
       } else if (_listDatas[i].indexLetter == _listDatas[i - 1].indexLetter) {
-        _gruopOffset += 50;
+        _gruopOffset += 50.0;
       } else {
         //这部分就是有头部的cell了
         _groupOffsetMap.addAll({_listDatas[i].indexLetter: _gruopOffset});
-        _gruopOffset += 80;
+        _gruopOffset += 80.0;
       }
     }
-
-    ScrollController _scrollController;
   }
 
 
@@ -130,10 +127,10 @@ class _FriendsPageState extends State<FriendsPage> {
               ),
             ), //列表
             Index_Bar(indexBarCallBack: (String str) {
-              if(_groupOffsetMap[str] != null) {
-                _scrollController.animateTo(_groupOffsetMap[str],
-                    duration: Duration(milliseconds: 1), curve: Curves.easeIn);
+              if (_groupOffsetMap[str] != null) {
+                _scrollController.animateTo(_groupOffsetMap[str], duration: Duration(microseconds: 100), curve: Curves.easeIn);
               }
+
             },
             ),//悬浮检索
           ],

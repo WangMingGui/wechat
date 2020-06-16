@@ -51,46 +51,62 @@ class _Index_BarState extends State<Index_Bar> {
       right: 0.0,
       bottom: KScreenHeight(context) / 8,
       height: KScreenHeight(context) / 2,
-      width: 20,
-      child: Container(
-        color: _backgroundColor,
-        child: GestureDetector(
-          child: Column(
-            children: words,
-          ),
+      width: 100,
+      child: Row(
+        children: <Widget>[
+          Container(
+            alignment: Alignment(0, _indicatorY),
+            width: 80,
+            child: _indicatorHidden ? null : Stack(
+              alignment: Alignment(-0.2, 0),
+              children: <Widget>[
+                Image(image: AssetImage('images/气泡.png'),width: 60,),
+                Text(_indicatorText,style: TextStyle(fontSize: 20,color: Colors.white),),
+              ],
+            ),
+          ),//气泡
+          GestureDetector(
+            child: Container(
+              color: _backgroundColor,
+              width: 20,
+              child: Column(
+                children: words,
+              ),
+            ),
 
-          onVerticalDragUpdate: (DragUpdateDetails details) {
-            int index = getIndex(context, details.globalPosition);
+            onVerticalDragUpdate: (DragUpdateDetails details) {
+              int index = getIndex(context, details.globalPosition);
 
-            setState(() {
+              setState(() {
+                _indicatorText = INDEX_WORDS[index];
+                //根据我们索引条的alignment的Y值进行运算，从-1.1到1.1
+                //整个的y包含的值是2.2
+                _indicatorY = 2.2 / INDEX_WORDS.length * index - 1.1;
+                _indicatorHidden = false;
+              });
+              widget.indexBarCallBack(INDEX_WORDS[index]);
+            },
+            onVerticalDragDown: (DragDownDetails details){
+              int index = getIndex(context, details.globalPosition);
               _indicatorText = INDEX_WORDS[index];
-              //根据我们索引条的alignment的Y值进行运算，从-1.1到1.1
-              //整个的y包含的值是2.2
-              _indicatorY = 2.2 / INDEX_WORDS.length * index - 1.1;
+              _indicatorY = 2.2 / 28 * index - 1.1;
               _indicatorHidden = false;
-            });
-            widget.indexBarCallBack(INDEX_WORDS[index]);
-          },
-          onVerticalDragDown: (DragDownDetails details){
-            int index = getIndex(context, details.globalPosition);
-            _indicatorText = INDEX_WORDS[index];
-            _indicatorY = 2.2 / 28 * index - 1.1;
-            _indicatorHidden = false;
-            widget.indexBarCallBack(INDEX_WORDS[index]);
-            setState(() {
-              _textColor = Colors.white;
-              _backgroundColor = Color.fromRGBO(1, 1, 1, 0.5);
-            });
-          },
-          onVerticalDragEnd: (DragEndDetails details) {
-            setState(() {
-              _indicatorHidden = true;
-              _textColor = Colors.black;
-              _backgroundColor = Color.fromRGBO(1, 1, 1, 0.3);
-            });
-          },
-        )
-      ),
+              widget.indexBarCallBack(INDEX_WORDS[index]);
+              setState(() {
+                _textColor = Colors.white;
+                _backgroundColor = Color.fromRGBO(1, 1, 1, 0.5);
+              });
+            },
+            onVerticalDragEnd: (DragEndDetails details) {
+              setState(() {
+                _indicatorHidden = true;
+                _textColor = Colors.black;
+                _backgroundColor = Color.fromRGBO(1, 1, 1, 0.3);
+              });
+            },
+          ),//索引条
+        ],
+      )
     ); //悬浮检索控件
   }
 }
